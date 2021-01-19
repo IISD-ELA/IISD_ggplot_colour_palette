@@ -40,6 +40,9 @@ dat <- tibble(group = rep(c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J"), e
               variable_b = rnorm(200, 100, 30) * rep(seq(0.1, 1, 0.1), each = 20))
 ```
 
+# Example plots
+
+The IISD colour palette has only 8 colours, so first i am going to filter my moc data to keep just 8 groups so we can see it in full action
 
 
 ```r
@@ -69,6 +72,19 @@ dat %>%
 
 ![](use_example_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
+If we only have two colours it will use the two blue shades in the logo (our primary brand colours)
+
+
+```r
+dat %>% 
+  filter(group %in% c("A", "B") ) %>% 
+  ggplot() +
+  geom_boxplot(aes(x = group, y = variable_a, fill = group), colour = "grey50") +
+  # geom_point(aes(x = bill_length_mm, y = bill_depth_mm, col = species)) +
+  scale_fill_iisd(palette = "iisd_main", discrete = TRUE)
+```
+
+![](use_example_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
 It works as well as `scale_colour_iisd()`. Once again i am going to filter the dataset so i only keep 8 levels.
 
@@ -81,7 +97,7 @@ dat %>%
   scale_colour_iisd(palette = "iisd_main", discrete = TRUE)
 ```
 
-![](use_example_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](use_example_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 # Use as a continuous scale
 
@@ -100,7 +116,7 @@ dat %>%
 ## Warning in pal(256): The IISD Discrete Color Palette only has 8 colors.
 ```
 
-![](use_example_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](use_example_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 
 
